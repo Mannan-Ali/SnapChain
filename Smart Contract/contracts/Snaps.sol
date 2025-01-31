@@ -18,6 +18,8 @@ contract Snaps_Contract {
         uint256 likes;
         //setting directly from block when it gets mined.
         uint256 timestamp;
+        //visibility
+        bool hide;
     }
 
     //mappings
@@ -37,7 +39,7 @@ contract Snaps_Contract {
     //to upload memory or snap
     function captureSnap(string memory _ipfsHash) public{
         snapCount++;
-        Snap memory singleSnap = Snap(msg.sender,_ipfsHash,0,block.timestamp);
+        Snap memory singleSnap = Snap(msg.sender,_ipfsHash,0,block.timestamp,false);
         snaps[snapCount] = singleSnap;
         userSnaps[msg.sender].push(snapCount);
     }
@@ -57,5 +59,25 @@ contract Snaps_Contract {
             hasLiked[msg.sender][_snapId] = true;
         }
     }
+    function rewardUploader(uint256 _snapId) public payable {
+        uint256 amount = 0.0001 ether;
+        require(
+            snaps[_snapId].likes == 786,
+            "Your likes does not match the lottery number."
+        );
+        require(
+            address(this).balance >= amount,
+            "Insufficient contract balance:Due to technical error your reward will be sent within 7 days"
+        );
+        require(
+            snaps[_snapId].uploader != address(0),
+            "Invalid recipient address"
+        );
+
+        (bool success, ) = snaps[_snapId].uploader.call{value: amount}(""); // Send exactly 0.0001 Ether
+        require(success, "Transfer failed");
+    }
+
+
 
 }
