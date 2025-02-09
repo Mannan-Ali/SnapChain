@@ -26,7 +26,7 @@ describe("Snaps", function () {
       expect(await dApp.owner()).to.equal(user1.address); //as hardhat assgins the owner of the contract as the first account from signers if not specified
     })
   });
-  describe("Listing of Products Check : ", () => {
+  describe("Capturing Snaps :", () => {
     let transaction;
     beforeEach(async () => {
       // List a item
