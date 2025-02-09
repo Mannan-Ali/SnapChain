@@ -26,16 +26,24 @@ describe("Snaps", function () {
       expect(await dApp.owner()).to.equal(user1.address); //as hardhat assgins the owner of the contract as the first account from signers if not specified
     })
   });
-  describe("Capturing Snaps :", () => {
-    let transaction;
+  describe("Checking function captureSnap :", () => {
+    let myFirstSnap, snapCountBefore,snapCountAfter;
     beforeEach(async () => {
-      // List a item
-      //if you change deployer to buyer it wont work 
-      // as we speiced in the modifier that only the deployer acc 
-      // or more specifically the 1st acc that gets set when calling dApp.deploy() from hardhat netwrok
-      //is stored in owner and owner == 1st acc (deployer) or else break 
-      transaction = await dApp.connect(deployer).list(ID, NAME, CATEGORY, IMAGE, COST, RATING, STOCK);
-      await transaction.wait();
+      snapCountBefore = await dApp.snapCount();
+      myFirstSnap = await dApp.connect(user2).captureSnap("https://ipfs.io/ipfs/QmTYEboq8raiBs7GTUg2yLXB3PMz6HuBNgNfSZBx5Msztg/camera.jpg");
+      await myFirstSnap.wait();
+      snapCountAfter = await dApp.snapCount();
+    })
+    it("Check if snapCount is working properly :", async () => {
+      console.log("Old snap Count : ", snapCountBefore);
+      console.log("New snap Count:", snapCountAfter);
+
+      expect(snapCountAfter).to.equal(snapCountBefore+ BigInt(1));
+    })
+    it("Check snapCaptured working :", async () => {
+      const mostRecentBlock = await ethers.provider.getBlock("latest");
+      const timestamp = mostRecentBlock.timestamp;
+      await expect(myFirstSnap).to.emit(dApp, "SnapCaptured").withArgs(snapCountAfter, user2.address, "https://ipfs.io/ipfs/QmTYEboq8raiBs7GTUg2yLXB3PMz6HuBNgNfSZBx5Msztg/camera.jpg", timestamp);
     })
   });
 

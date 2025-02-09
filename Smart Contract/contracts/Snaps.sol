@@ -33,6 +33,8 @@ contract Snaps_Contract {
     mapping(address => mapping(uint256 => bool)) public hasLiked;
 
     //events
+    //index snapId and uploader as it allows us for faster search through frontend
+    event SnapCaptured(uint256 indexed _snapId, address indexed uploader, string ipfsHash, uint256 timestamp);
     // event SnapLiked(uint256 indexed snapId, address liker, uint256 newLikes);
     // event SnapDisliked(uint256 indexed snapId, address disliker, uint256 newLikes);
 
@@ -64,6 +66,7 @@ contract Snaps_Contract {
         );
         snaps[snapCount] = singleSnap;
         userSnaps[msg.sender].push(snapCount);
+        emit SnapCaptured(snapCount,msg.sender,_ipfsHash,block.timestamp);
     }
 
     //to like or not like a liked snap
@@ -99,7 +102,6 @@ function likeSnap(uint256 _snapId) public checkValidity(_snapId) {
     // }
 
     function toggleHideSnap(uint256 _snapId) public checkValidity(_snapId){
-        require(_snapId > 0 && _snapId <= snapCount, "Invalid snap ID");
         Snap storage snap = snaps[_snapId];
         require(
             msg.sender == snap.uploader,
