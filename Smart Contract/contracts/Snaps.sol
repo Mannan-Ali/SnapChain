@@ -34,9 +34,24 @@ contract Snaps_Contract {
 
     //events
     //index snapId and uploader as it allows us for faster search through frontend
-    event SnapCaptured(uint256 indexed _snapId, address indexed uploader, string ipfsHash, uint256 timestamp);
-    // event SnapLiked(uint256 indexed snapId, address liker, uint256 newLikes);
-    // event SnapDisliked(uint256 indexed snapId, address disliker, uint256 newLikes);
+    event SnapCaptured(
+        uint256 indexed _snapId,
+        address indexed uploader,
+        string ipfsHash,
+        uint256 timestamp
+    );
+
+    event SnapDataChanged(uint256 indexed _snapId, bool newVisibility); //this event for frontend to dymanically acccess change in visibility
+    event SnapLikeEvent(
+        uint256 indexed snapId,
+        address liker,
+        uint256 newLikes
+    );
+    event SnapRemoveLikeEvent(
+        uint256 indexed snapId,
+        address liker,
+        uint256 newLikes
+    );
 
     //modifiers
     modifier checkValidity(uint256 _snapId) {
@@ -66,21 +81,24 @@ contract Snaps_Contract {
         );
         snaps[snapCount] = singleSnap;
         userSnaps[msg.sender].push(snapCount);
-        emit SnapCaptured(snapCount,msg.sender,_ipfsHash,block.timestamp);
+        emit SnapCaptured(snapCount, msg.sender, _ipfsHash, block.timestamp);
     }
 
     //to like or not like a liked snap
-function likeSnap(uint256 _snapId) public checkValidity(_snapId) {
+    function likeSnap(uint256 _snapId) public checkValidity(_snapId) {
         if (hasLiked[msg.sender][_snapId]) {
             // If already - remove like
             snaps[_snapId].likes--;
             hasLiked[msg.sender][_snapId] = false;
+            emit SnapRemoveLikeEvent(_snapId, msg.sender, snaps[_snapId].likes);
         } else {
             // If not liked, like it
             snaps[_snapId].likes++;
             hasLiked[msg.sender][_snapId] = true;
+            emit SnapLikeEvent(_snapId, msg.sender, snaps[_snapId].likes);
         }
     }
+
     /* >>>>>>  NOT SURE ON WHAT CRITERIA SHOULD THE AWARD OR PINNING SHOULD BE GIVEN  <<<<<<< */
     // function rewardUploader(uint256 _snapId) public payable {
     //     uint256 amount = 0.0001 ether;
@@ -101,14 +119,14 @@ function likeSnap(uint256 _snapId) public checkValidity(_snapId) {
     //     require(success, "Transfer failed");
     // }
 
-    function toggleHideSnap(uint256 _snapId) public checkValidity(_snapId){
+    function toggleHideSnap(uint256 _snapId) public checkValidity(_snapId) {
         Snap storage snap = snaps[_snapId];
         require(
             msg.sender == snap.uploader,
-            "You can only hide your own snaps"
+            "You can only hide your own snaps" //only allowing owner of snaps
         );
 
-        snap.hideVisibility = !snap.hideVisibility; // Toggle the hidden status
-        // emit SnapVisibilityChanged(_snapId, snap.hidden); // Emit an event for the frontend to track changes
+        snap.hideVisibility = !snap.hideVisibility; // chage the visibility of snaps
+        emit SnapDataChanged(_snapId, snap.hideVisibility); // Emit an event for the frontend to track changes
     }
 }
