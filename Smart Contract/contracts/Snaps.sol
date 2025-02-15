@@ -10,7 +10,7 @@ contract Snaps_Contract {
 
     //addresses
     struct Snap {
-        ///address of the person uploading there snap
+        //address of the person uploading there snap
         address uploader;
         //meta deta like img link and description from pinata(ipfs)
         string ipfsHash;
