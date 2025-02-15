@@ -88,5 +88,32 @@ describe("Snaps", function () {
       await expect(like1again).to.emit(dApp, "SnapRemoveLikeEvent").withArgs(1, user1.address,0);
     })
   })
+  describe("Checking function toggleSnap :", () => {
+    let myFirstSnap,changeVisibilityForsnap1;
+    beforeEach(async () => {
+      myFirstSnap = await dApp.connect(user2).captureSnap("https://ipfs.io/ipfs/QmTYEboq8raiBs7GTUg2yLXB3PMz6HuBNgNfSZBx5Msztg/camera.jpg");
+      await myFirstSnap.wait();
+
+      //check for if own snaps hide visibility modifier works
+      // mySecondSnap = await dApp.connect(user1).captureSnap("https://ipfs.io/ipfs/QmTYEboq8raiBs7GTUg2yLXB3PMz6HuBNgNfSZBx5Msztg/camera.jpg");
+      // await mySecondSnap.wait();
+
+      changeVisibilityForsnap1 = await dApp.connect(user2).toggleHideSnap(1);
+      await changeVisibilityForsnap1.wait();
+    })
+    it("Checking if  hideVisibility for snap 1 is false:", async () => {
+      const snap1 = await dApp.snaps(1);
+      console.log(snap1);
+      expect(snap1.hideVisibility).to.equal(true);
+
+    })
+    it("checking events functioning : ", async ()=>{
+
+      await expect(changeVisibilityForsnap1).to.emit(dApp, "SnapDataChanged").withArgs(1, true);
+
+      const again = await dApp.connect(user2).toggleHideSnap(1);
+      await expect(again).to.emit(dApp, "SnapDataChanged").withArgs(1, false);
+    })
+  });
 
 })
