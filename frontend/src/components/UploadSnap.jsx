@@ -2,12 +2,17 @@ import { useState } from "react";
 import storeOnIPFS_Pinata from "../storage/ipfs.storage";
 
 function UploadSnap() {
+  const [title, settitle] = useState("");
   const [file, setfiles] = useState("");
   const [description, setSnapDescription] = useState("");
+  const [response, setresponse] = useState("");
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      storeOnIPFS_Pinata(file,description);
+      const response = await storeOnIPFS_Pinata(title,file,description);
+      setresponse(response);
+
     } catch (error) {
       console.log("Error while calling IPFS function: ", error);
     }
@@ -24,6 +29,17 @@ function UploadSnap() {
           }}
         />
         <div>
+        <label htmlFor="fname">Enter title</label>
+          <input
+            type="text"
+            name="tname"
+            id="tname"
+            onChange={(e) => {
+              settitle(e.target.value);
+            }}
+            value={title}
+            placeholder="describe the event/img"
+          />
           <label htmlFor="fname">Enter Description</label>
           <input
             type="text"
@@ -39,6 +55,7 @@ function UploadSnap() {
         <button type="submit" onClick={handleSubmit}>
           Upload
         </button>
+        <h1>{response}</h1>
       </form>
     </>
   );

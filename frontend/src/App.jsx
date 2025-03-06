@@ -1,5 +1,5 @@
 import "./App.css";
-import UploadSnap from "./components/uploadSnap";
+import UploadSnap from "./components/UploadSnap";
 function App() {
   return (
     <>

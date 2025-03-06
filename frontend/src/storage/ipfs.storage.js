@@ -1,6 +1,10 @@
 import axios from "axios";
-const storeOnIPFS_Pinata = async (snapImage,snapDiscription) => {
+const storeOnIPFS_Pinata = async (snapTitle, snapImage, snapDiscription) => {
     try {
+        console.log("snapTitle:", snapTitle);
+        console.log("snapImage:", snapImage);
+        console.log("snapDescription:", snapDiscription);
+
         const fileData = new FormData();
         fileData.append("file", snapImage);
 
@@ -19,8 +23,9 @@ const storeOnIPFS_Pinata = async (snapImage,snapDiscription) => {
 
         //uploading json with description
         const metadata = {
+            title: snapTitle,
             image: fileUrl,
-            description:snapDiscription,
+            description: snapDiscription,
         }
 
         const metadataResponse = await axios({
@@ -31,10 +36,18 @@ const storeOnIPFS_Pinata = async (snapImage,snapDiscription) => {
                 pinata_secret_api_key: import.meta.env.VITE_PINATA_API_SECRET,
                 "Content-Type": "application/json",
             },
-            data: JSON.stringify(metadata),
+            data: JSON.stringify(
+                {
+                    pinataMetadata:{
+                        name:snapTitle,
+                    },
+                    pinataContent: metadata,
+                }
+            ),
         })
         const metaDataUrl = "https://gateway.pinata.cloud/ipfs/" + metadataResponse.data.IpfsHash;
         console.log(metaDataUrl);
+        return metaDataUrl;
 
     } catch (error) {
         console.log("Error occured while submitting: ", error);
