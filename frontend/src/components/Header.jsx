@@ -62,7 +62,7 @@ const Header = (props) => {
                 }
                 onClick={() => {
                   closeMenu(); 
-                  alert("\u2139 The functions Buy, Sell and Check Details are not available as it hasn't been deployed on the live test network due to insufficient test Sepolia Ether.😢");
+                  // alert("\u2139 The functions Buy, Sell and Check Details are not available as it hasn't been deployed on the live test network due to insufficient test Sepolia Ether.😢");
                 }}
               >
                 Explore
@@ -76,7 +76,7 @@ const Header = (props) => {
                 }
                 onClick={() => {
                   closeMenu(); 
-                  alert("\u2139 The functions Buy, Sell and Check Details are not available as it hasn't been deployed on the live test network due to insufficient test Sepolia Ether.😢");
+                  // alert("\u2139 The functions Buy, Sell and Check Details are not available as it hasn't been deployed on the live test network due to insufficient test Sepolia Ether.😢");
                 }}
               >
                 Take Snap
