@@ -1,5 +1,5 @@
 import { useState } from "react";
-import storeOnIPFS_Pinata from "../storage/ipfs.storage";
+import storeOnIPFS_Pinata from "../utils/ipfs.storage.js";
 
 function UploadSnap() {
   const [title, settitle] = useState("");
