@@ -14,12 +14,14 @@ import App from "./App.jsx";
 //components
 import UploadSnap from "./components/UploadSnap.jsx";
 import Main from './components/Home.jsx'
+import ExploreSnap from "./components/ExploreSnap.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route path="" element={<Main/>} />
       <Route path="uploadSnap" element={<UploadSnap/>} />
+      <Route path="explore" element={<ExploreSnap/>} />
     </Route>
   )
 );

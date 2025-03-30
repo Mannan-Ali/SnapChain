@@ -56,7 +56,7 @@ const Header = (props) => {
             </li>
             <li className="nav__item">
               <NavLink
-                to="/uploadSnap"
+                to="/explore"
                 className={({ isActive }) =>
                   isActive ? `nav__link active-link` : `nav__link`
                 }

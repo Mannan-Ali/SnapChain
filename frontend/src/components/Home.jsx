@@ -13,10 +13,10 @@ const Main = () => {
 
           <div className="home__data">
             <h1 className="home__title">
-              THE FUTURE <br />
-              <span>FINANCE</span> IN
+              SNAPS THAT LAST <br />
+              <span>FOREVER</span> IN
               <br />
-              YOUR HANDS
+              EXPRESS. CONNECT. IMMORTALIZE.
               <br />
             </h1>
             <p className="home__description">
