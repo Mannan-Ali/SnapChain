@@ -47,7 +47,7 @@ const storeOnIPFS_Pinata = async (snapTitle, snapImage, snapDiscription) => {
         })
         const metaDataUrl = "https://gateway.pinata.cloud/ipfs/" + metadataResponse.data.IpfsHash;
         console.log(metaDataUrl);
-        return metaDataUrl;
+        return metadataResponse.data.IpfsHash;
 
     } catch (error) {
         console.log("Error occured while submitting: ", error);

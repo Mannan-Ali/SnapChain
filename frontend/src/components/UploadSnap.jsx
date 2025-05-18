@@ -1,19 +1,35 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import storeOnIPFS_Pinata from "../utils/ipfs.storage.js";
 
-function UploadSnap() {
+function UploadSnap(props) {
+  const [signer,setSigner] = useState(null);
+
   const [title, settitle] = useState("");
   const [file, setfiles] = useState("");
   const [description, setSnapDescription] = useState("");
-  const [response, setresponse] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const signer = await props.provider.getSigner();
+      setSigner(signer);
+
+      if(!signer) throw new Error("Signer is not set yet!");
+
       const response = await storeOnIPFS_Pinata(title, file, description);
-      setresponse(response);
+      console.log("proiver:",props.provider);
+
+      if (!response) throw new Error("No IPFS hash received from Pinata");
+
+      let callCaptureSnap = await props.dApp
+        .connect(signer)
+        .captureSnap(response);
+
+      await callCaptureSnap.wait();
+      console.log("Snap successfully uploaded to blockchain!");
     } catch (error) {
-      console.log("Error while calling IPFS function: ", error);
+      console.log("Error while calling uploading file function: ", error);
     }
   };
   return (

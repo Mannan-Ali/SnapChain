@@ -6,7 +6,7 @@ import { HashLink } from "react-router-hash-link";
 // rafc
 const Header = (props) => {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
-  //// Get the current location to track the URL hash for functioning of isActive
+  // Get the current location to track the URL hash for functioning of isActive
   const location = useLocation();
   //here we are checking is hash matches the current location then the class will be applied on Description
   const isActive = (hash) => {
@@ -34,7 +34,7 @@ const Header = (props) => {
       <nav className="nav container">
         <NavLink to="/" className="nav__logo">
           <i className="ri-btc-fill"></i>
-          <span>MCOIN</span>
+          <span>Snaps</span>
         </NavLink>
 
         <div className={`nav__menu ${isMenuVisible ? "show-menu" : ""}`}>
