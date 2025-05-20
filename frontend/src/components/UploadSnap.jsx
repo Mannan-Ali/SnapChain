@@ -1,8 +1,10 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
+import { useOutletContext } from "react-router-dom";
 import storeOnIPFS_Pinata from "../utils/ipfs.storage.js";
 
-function UploadSnap(props) {
+function UploadSnap() {
+  const {provider, dApp } = useOutletContext();
   const [signer,setSigner] = useState(null);
 
   const [title, settitle] = useState("");
@@ -12,17 +14,17 @@ function UploadSnap(props) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const signer = await props.provider.getSigner();
+      const signer = await provider.getSigner();
       setSigner(signer);
 
       if(!signer) throw new Error("Signer is not set yet!");
 
       const response = await storeOnIPFS_Pinata(title, file, description);
-      console.log("proiver:",props.provider);
+      console.log("proiver:",provider);
 
       if (!response) throw new Error("No IPFS hash received from Pinata");
 
-      let callCaptureSnap = await props.dApp
+      let callCaptureSnap = await dApp
         .connect(signer)
         .captureSnap(response);
 

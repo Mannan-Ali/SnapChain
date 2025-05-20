@@ -50,18 +50,7 @@ function App() {
       <Header account={account} setAccount={setAccount} />
       <h1>{account}</h1>
       {provider && dApp ? (
-        <>
-          <ExploreSnap
-            account={account}
-            provider={provider}
-            dApp={dApp}
-          />
-          <UploadSnap
-            account={account}
-            provider={provider}
-            dApp={dApp}
-          />
-        </>
+        <Outlet context={{provider, dApp }} />
       ) : (
         <p>Loading Web3 connection...</p>
       )}

@@ -1,30 +1,41 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect } from "react";
+import { useState,} from "react";
+import { useOutletContext } from "react-router-dom";
 
-const ExploreSnap = (props) => {
-  const [signer, setSigner] = useState(null);
+const ExploreSnap = () => {
+    const {provider, dApp } = useOutletContext();
+  const [lastSnapLoaded, setLastSnapLoaded] = useState(1);
   const [snaps, setSnaps] = useState([]);
 
   const callSnapDisplay = async () => {
     // const test = await props.dApp.snapCount();
     // console.log(test);
+
     try {
-      const count = await props.dApp.snapCount(); // get total snaps
+      const count = Number(await dApp.snapCount()); // get total snaps
       const snapArray = [];
 
-      for (let i = 1; i < count; i++) {
-        const snap = await props.dApp.snaps(i); // fetch each snap
+      for (let i = lastSnapLoaded; i <= count; i++) {
+        const snap = await dApp.snaps(i); // fetch each snap
+
+        const metaURL = `https://gateway.pinata.cloud/ipfs/${snap.ipfsHash}`;
+        const response = await fetch(metaURL);
+        const meta = await response.json();
+
         snapArray.push({
           snapId: i,
           uploader: snap.uploader,
-          ipfsHash: snap.ipfsHash,
+          title: meta.title,
+          image: meta.image,
+          description: meta.description,
           likes: snap.likes.toString(),
           timestamp: new Date(Number(snap.timestamp) * 1000).toLocaleString(),
           hideVisibility: snap.hideVisibility,
         });
       }
 
-      setSnaps(snapArray); // update state with all fetched snaps
+      setSnaps((prev) => [...prev, ...snapArray]); 
+      setLastSnapLoaded(count+1); // update index
     } catch (error) {
       console.error("Error fetching snaps:", error);
     }
@@ -42,12 +53,18 @@ const ExploreSnap = (props) => {
           snaps.map((snap) => (
             <div key={snap.snapId} className="snap-card">
               <img
-                src={`https://gateway.pinata.cloud/ipfs/${snap.ipfsHash}`}
+                src={snap.image}
                 alt={`Snap ${snap.snapId}`}
                 className="snap-image"
               />
               <p>
                 <strong>Uploader:</strong> {snap.uploader}
+              </p>
+              <p>
+                <strong>Title:</strong> {snap.title}
+              </p>
+              <p>
+                <strong>Description:</strong> {snap.description}
               </p>
               <p>
                 <strong>Likes:</strong> {snap.likes}
