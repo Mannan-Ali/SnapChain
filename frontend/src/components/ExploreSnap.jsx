@@ -3,7 +3,7 @@ import { useState,} from "react";
 import { useOutletContext } from "react-router-dom";
 
 const ExploreSnap = () => {
-    const {provider, dApp } = useOutletContext();
+    const { dApp } = useOutletContext();
   const [lastSnapLoaded, setLastSnapLoaded] = useState(1);
   const [snaps, setSnaps] = useState([]);
 

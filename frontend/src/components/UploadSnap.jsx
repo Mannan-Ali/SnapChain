@@ -5,7 +5,6 @@ import storeOnIPFS_Pinata from "../utils/ipfs.storage.js";
 
 function UploadSnap() {
   const {provider, dApp } = useOutletContext();
-  const [signer,setSigner] = useState(null);
 
   const [title, settitle] = useState("");
   const [file, setfiles] = useState("");
@@ -15,7 +14,6 @@ function UploadSnap() {
     e.preventDefault();
     try {
       const signer = await provider.getSigner();
-      setSigner(signer);
 
       if(!signer) throw new Error("Signer is not set yet!");
 

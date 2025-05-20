@@ -9,8 +9,6 @@ import config from "./utils/config.json";
 
 //components
 import Header from "./components/Header";
-import ExploreSnap from "./components/ExploreSnap";
-import UploadSnap from "./components/UploadSnap";
 import "./App.css";
 
 function App() {
