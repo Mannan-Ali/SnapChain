@@ -14,7 +14,7 @@ import App from "./App.jsx";
 //components
 import UploadSnap from "./components/UploadSnap.jsx";
 import Main from './components/Home.jsx'
-import ExploreSnap from "./components/ExploreSnap.jsx";
+import ExploreSnap from "./components/ExploreSnap/ExploreSnap.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

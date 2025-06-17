@@ -1,23 +1,20 @@
 /* eslint-disable react/prop-types */
-import { useState,} from "react";
+import { useState,useEffect,useRef} from "react";
 import { useOutletContext } from "react-router-dom";
 
 const ExploreSnap = () => {
-    const { dApp } = useOutletContext();
-  const [lastSnapLoaded, setLastSnapLoaded] = useState(1);
+  const { dApp } = useOutletContext();
   const [snaps, setSnaps] = useState([]);
+  const [lastSnapLoaded, setLastSnapLoaded] = useState(0);
+  const hasFetched = useRef(false); 
 
   const callSnapDisplay = async () => {
-    // const test = await props.dApp.snapCount();
-    // console.log(test);
-
     try {
-      const count = Number(await dApp.snapCount()); // get total snaps
+      const count = Number(await dApp.snapCount());
       const snapArray = [];
 
-      for (let i = count; i >= lastSnapLoaded; i--) {
-        const snap = await dApp.snaps(i); // fetch each snap
-
+      for (let i = count; i > lastSnapLoaded; i--) {
+        const snap = await dApp.snaps(i);
         const metaURL = `https://gateway.pinata.cloud/ipfs/${snap.ipfsHash}`;
         const response = await fetch(metaURL);
         const meta = await response.json();
@@ -34,18 +31,22 @@ const ExploreSnap = () => {
         });
       }
 
-      setSnaps((prev) => [...prev, ...snapArray]); 
-      setLastSnapLoaded(count+1); // update index
+      setSnaps((prev) => [...snapArray, ...prev]);
+      setLastSnapLoaded(count);
     } catch (error) {
       console.error("Error fetching snaps:", error);
     }
   };
+
+  useEffect(() => {
+    if (dApp && !hasFetched.current) {
+      hasFetched.current = true;
+      callSnapDisplay();
+    }
+  }, [dApp]);
   return (
     <section className="desc section" id="desc">
       <h2 className="section__title">Snaps here Enjoy</h2>
-      <button className="button" onClick={callSnapDisplay}>
-        Click
-      </button>
       <div className="snap-list">
         {snaps.length === 0 ? (
           <p>No snaps found.</p>
