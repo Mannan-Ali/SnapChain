@@ -15,7 +15,7 @@ const ExploreSnap = () => {
       const count = Number(await dApp.snapCount()); // get total snaps
       const snapArray = [];
 
-      for (let i = lastSnapLoaded; i <= count; i++) {
+      for (let i = count; i >= lastSnapLoaded; i--) {
         const snap = await dApp.snaps(i); // fetch each snap
 
         const metaURL = `https://gateway.pinata.cloud/ipfs/${snap.ipfsHash}`;
