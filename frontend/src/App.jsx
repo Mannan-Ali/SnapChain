@@ -46,7 +46,6 @@ function App() {
   return (
     <div>
       <Header account={account} setAccount={setAccount} />
-      <h1>{account}</h1>
       {provider && dApp ? (
         <Outlet context={{provider, dApp }} />
       ) : (
