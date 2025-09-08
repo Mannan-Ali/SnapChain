@@ -1,5 +1,3 @@
-import myImage from "../assets/img/currency.png";
-import descImg from "../assets/img/coins.png";
 import { NavLink } from "react-router-dom";
 
 
@@ -9,14 +7,13 @@ const Main = () => {
       {/* <!--==================== HOME ====================--> */}
       <section className="home section" id="home">
         <div className="home__container container grid">
-          <img src={myImage} alt="image" className="home__img" />
-
           <div className="home__data">
             <h1 className="home__title">
-              SNAPS THAT LAST <br />
-              <span>FOREVER</span> IN
+              A Home for  
+              <span> Memories </span>
+              That
               <br />
-              EXPRESS. CONNECT. IMMORTALIZE.
+              Last Forever. 
               <br />
             </h1>
             <p className="home__description">

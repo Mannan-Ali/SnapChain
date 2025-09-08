@@ -52,7 +52,7 @@
 /* <!-- ✨ Responsive typography ✨ --> */
 @media screen and (min-width: 1150px) {
   :root {
-    --biggest-font-size: 4.25rem;
+    --biggest-font-size: 4rem;
     --h1-font-size: 2.25rem;
     --h2-font-size: 1.5rem;
     --h3-font-size: 1.25rem;
@@ -237,7 +237,12 @@ header {
 /* <!-- ✨ HOME ✨ --> */
 
 .home__container {
-  padding-top: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; /* Stack content vertically */
+  text-align: center; /* Center text */
+  padding-top: 4rem;
   row-gap: 2rem;
 }
 
@@ -976,10 +981,8 @@ form button{
   }
 
   .home__container {
-    grid-template-columns: 480px 535px;
-    align-items: center;
-    column-gap: 12rem;
-    padding-top: 4rem;
+    grid-template-columns: 1fr;
+    column-gap: 0;
   }
 
   .home__img {
@@ -987,16 +990,15 @@ form button{
   }
 
   .home__data {
-    text-align: initial;
+    text-align: center;
   }
 
   .home__description {
-    margin-bottom: 4.5rem;
+    margin-bottom: 1.5rem;
   }
 
   .home__buttons {
-    justify-content: initial;
-    column-gap: 1.5rem;
+    justify-content: center;
   }
 
   .desc__container {
