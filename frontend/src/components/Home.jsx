@@ -9,7 +9,7 @@ const Main = () => {
         <div className="home__container container grid">
           <div className="home__data">
             <h1 className="home__title">
-              A Home for  
+              Home for  
               <span> Memories </span>
               That
               <br />
@@ -18,9 +18,8 @@ const Main = () => {
             </h1>
             <p className="home__description">
               <p className="home__description">
-                Take control of your investments with a token that&apos;s built
-                for the future. Offering fast, secure, and seamless transactions
-                that empower your financial goals.
+                SnapChain uses Blockchain Technology to protect what matters most - memories.
+                <br/> A space where happiness never fades.
               </p>
             </p>
             <div className="home__buttons">

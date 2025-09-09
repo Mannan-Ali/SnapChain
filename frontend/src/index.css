@@ -1,6 +1,6 @@
 /* <!-- ✨ GOOGLE FONTS,HEADER & NAV ✨ --> */
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap");
-
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,600;1,600&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital@0;1&display=swap");
@@ -52,7 +52,7 @@
 /* <!-- ✨ Responsive typography ✨ --> */
 @media screen and (min-width: 1150px) {
   :root {
-    --biggest-font-size: 4rem;
+    --biggest-font-size: 4.55rem;
     --h1-font-size: 2.25rem;
     --h2-font-size: 1.5rem;
     --h3-font-size: 1.25rem;
@@ -157,6 +157,9 @@ header {
   column-gap: 0.25rem;
   align-items: center;
 }
+nav__logo span{
+  font-size: 2rem;
+}
 .nav__logo i {
   color: var(--first-color);
   font-size: 1.8rem;
@@ -242,7 +245,7 @@ header {
   align-items: center;
   flex-direction: column; /* Stack content vertically */
   text-align: center; /* Center text */
-  padding-top: 4rem;
+  padding-top: 8.5rem;
   row-gap: 2rem;
 }
 
@@ -257,6 +260,7 @@ header {
 }
 
 .home__title {
+  font-family: "Space Grotesk",sans-serif;
   font-size: var(--biggest-font-size);
   font-weight: var(--font-bold);
   margin-bottom: 1rem;
@@ -954,7 +958,7 @@ form button{
   }
 
   .nav {
-    height: calc(var(--header-height) + 2rem);
+    height: calc(var(--header-height) + 1.5rem);
   }
 
   .nav__toggle,
@@ -973,6 +977,7 @@ form button{
   .nav__list {
     flex-direction: row;
     column-gap: 3.5rem;
+    padding-left: 38.5rem;
   }
 
   .nav__actions {

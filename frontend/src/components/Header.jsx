@@ -1,4 +1,6 @@
 /* eslint-disable react/prop-types */
+import cam1 from "../assets/img/cameraH.png"
+
 import { NavLink, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { ethers } from "ethers";
@@ -33,7 +35,7 @@ const Header = (props) => {
     <header className="header" id="header">
       <nav className="nav container">
         <NavLink to="/" className="nav__logo">
-          <i className="ri-btc-fill"></i>
+          <img src={cam1} alt="icon" />
           <span>Snaps</span>
         </NavLink>
 
@@ -70,7 +72,7 @@ const Header = (props) => {
             </li>
             <li className="nav__item">
               <NavLink
-                to="/uploadSnap"
+                to="/about"
                 className={({ isActive }) =>
                   isActive ? `nav__link active-link` : `nav__link`
                 }
@@ -79,22 +81,8 @@ const Header = (props) => {
                   // alert("\u2139 The functions Buy, Sell and Check Details are not available as it hasn't been deployed on the live test network due to insufficient test Sepolia Ether.😢");
                 }}
               >
-                Take Snap
+                About
               </NavLink>
-            </li>
-            <li className="nav__item">
-              <HashLink
-                smooth
-                to="/#Description"
-                className={
-                  isActive("#Description")
-                    ? "nav__link active-link"
-                    : "nav__link"
-                }
-                onClick={closeMenu}
-              >
-                Description
-              </HashLink>
             </li>
           </ul>
 
@@ -111,7 +99,7 @@ const Header = (props) => {
               {props.account.slice(0, 2) + "..." + props.account.slice(39, 42)}
             </p>
           ) : (
-            <p className="nav__connect" onClick={connectHandler}>LINK</p>
+            <p className="nav__connect" onClick={connectHandler}>Link</p>
           )}
 
           {/* <!-- Toggle Button --> */}
