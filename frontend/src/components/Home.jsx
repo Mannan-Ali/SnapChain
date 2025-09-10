@@ -1,11 +1,10 @@
-import { NavLink } from "react-router-dom";
 import UploadSnap from "../components/UploadSnap.jsx"
 
 const Main = () => {
   return (
     <main className="main">
       {/* <!--==================== HOME ====================--> */}
-      <section className="home section" id="home">
+      <section className="home section home__sec" id="home">
         <div className="home__container container grid">
           <div className="home__data">
             <h1 className="home__title">

@@ -10,8 +10,8 @@
   --header-height: 3.5rem;
   /*========== Colors ==========*/
   /*Color mode HSL(hue, saturation, lightness)*/
-  --first-color: hsl(93, 54%, 54%);
-  --first-color-alt: hsl(93, 50%, 48%);
+  --first-color: #3e8dc9;
+  --first-color-alt: hsl(221, 61%, 46%);
   --first-color-light: hsl(93, 58%, 66%);
   --title-color: hsl(180, 2%, 8%);
   --text-color: hsl(223, 6%, 23%);
@@ -239,13 +239,25 @@ nav__logo span{
 }
 /* <!-- ✨ HOME ✨ --> */
 
+/* .home__sec {
+  background-color: #6ebbff;
+} */
+/*
+.home__sec {
+  background-color: #F1EBDB;
+  width: 70vw;
+  max-width: 1200px;
+  margin: 2.5rem auto 0 auto; /* Top margin creates gap from header */
+  /* border-radius: 2rem; */
+  /* box-shadow: 0 2px 16px rgba(0, 0, 0, 0.05; */
+/* } */
 .home__container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column; /* Stack content vertically */
   text-align: center; /* Center text */
-  padding-top: 8.5rem;
+  padding: 7.5rem 0 3rem 0;
   row-gap: 2rem;
 }
 

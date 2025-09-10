@@ -36,7 +36,7 @@ const Header = (props) => {
       <nav className="nav container">
         <NavLink to="/" className="nav__logo">
           <img src={cam1} alt="icon" />
-          <span>Snaps</span>
+          <span>SnapChain</span>
         </NavLink>
 
         <div className={`nav__menu ${isMenuVisible ? "show-menu" : ""}`}>
