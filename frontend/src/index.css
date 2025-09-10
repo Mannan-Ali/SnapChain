@@ -44,7 +44,7 @@
   /* <!-- ✨ Font weight ✨ --> */
   --font-regular: 400;
   --font-semi-bold: 600;
-  --font-bold: 700;
+  --font-bold: 600;
   /* <!-- ✨ z index ✨ --> */
   --z-tooltip: 10;
   --z-fixed: 100;
@@ -260,7 +260,7 @@ nav__logo span{
 }
 
 .home__title {
-  font-family: "Space Grotesk",sans-serif;
+  font-family: var(--body-font);
   font-size: var(--biggest-font-size);
   font-weight: var(--font-bold);
   margin-bottom: 1rem;
@@ -292,6 +292,17 @@ nav__logo span{
   align-items: center;
   column-gap: 0.75rem;
 }
+.button--secondary {
+  margin-left: 2rem;
+  background-color: var(--black-color);
+  color: var(--white-color);
+}
+
+.button--secondary span {
+  background-color: var(--white-color);
+  color: var(--black-color);
+}
+
 
 .button span {
   background-color: var(--white-color);

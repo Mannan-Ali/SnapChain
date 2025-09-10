@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-
+import UploadSnap from "../components/UploadSnap.jsx"
 
 const Main = () => {
   return (
@@ -22,25 +22,10 @@ const Main = () => {
                 <br/> A space where happiness never fades.
               </p>
             </p>
-            <div className="home__buttons">
-              <NavLink
-                to="/transectMcoins"
-                onClick={() => {
-                  alert(
-                    "\u2139 The functions Buy, Sell and Check Details are not available as it hasn't been deployed on the live test network due to insufficient test Sepolia Ether.😢"
-                  );
-                }}
-                className="button"
-              >
-                <span>
-                  <i className="ri-arrow-right-line"></i>
-                </span>
-                BUY TOKEN
-              </NavLink>
-            </div>
           </div>
         </div>
       </section>
+      <UploadSnap/>
     </main>
   );
 };
