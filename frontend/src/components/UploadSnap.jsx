@@ -28,6 +28,15 @@ function UploadSnap() {
 
       await callCaptureSnap.wait();
       console.log("Snap successfully uploaded to blockchain!");
+
+      // ✅ Clear the form after success
+      settitle("");
+      setfiles("");
+      setSnapDescription("");
+
+      // Also reset file input visually
+      document.getElementById("snap-upload").value = "";
+
     } catch (error) {
       console.log("Error while calling uploading file function: ", error);
     }
@@ -35,9 +44,7 @@ function UploadSnap() {
   return (
     <section className="desc section" id="desc">
       <h2 className="section__title">
-        IPFS Tutorial
-        <br />
-        Upload your file
+        Upload your Memories
       </h2>
       <div className="desc__container container grid">
         <div className="form-container">
